@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Михаил Смирнов · MPSTATS DATA</title>
+  <meta name="description" content="Аналитика маркетплейсов, AI-агенты и данные для бизнеса — MPSTATS DATA">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #080808;
+      font-family: 'Golos Text', sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .card {
+      background: #0e0e0e;
+      border: 1px solid #1a1a1a;
+      border-radius: 20px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 680px;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 3rem 2.5rem 2.5rem;
+      border-bottom: 1px solid #1a1a1a;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(61,220,132,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #0e2a1a;
+      border: 1px solid #1a4a2a;
+      color: #3ddc84;
+      font-size: 11px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 1.4rem;
+    }
+    .pill::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #3ddc84;
+      flex-shrink: 0;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .hero-name {
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.02em;
+    }
+    .hero-name span { color: #3ddc84; }
+    .hero-role {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1.8rem;
+    }
+    .hero-desc {
+      font-size: 0.9rem;
+      color: #888;
+      line-height: 1.7;
+      max-width: 440px;
+    }
+
+    /* BODY */
+    .body { padding: 2rem 2.5rem; }
+
+    .slabel {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #3a3a3a;
+      margin-bottom: 1rem;
+    }
+
+    /* SERVICES */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 10px;
+      margin-bottom: 2rem;
+    }
+    .sc {
+      background: #131313;
+      border: 1px solid #1e1e1e;
+      border-radius: 12px;
+      padding: 1.1rem;
+      transition: border-color 0.2s;
+    }
+    .sc:hover { border-color: #2e2e2e; }
+    .sc-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #3ddc84;
+      margin-bottom: 0.6rem;
+    }
+    .sc-head {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.45rem;
+      line-height: 1.3;
+    }
+    .sc-text {
+      font-size: 0.8rem;
+      color: #666;
+      line-height: 1.55;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      margin: 0 0 2rem;
+    }
+
+    /* AI BLOCK */
+    .ai-block {
+      background: #0a1f12;
+      border: 1px solid #1a3a22;
+      border-radius: 14px;
+      padding: 1.6rem 1.8rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .ai-block::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(61,220,132,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #0e2a1a;
+      border: 1px solid #2a6040;
+      color: #3ddc84;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-bottom: 0.75rem;
+    }
+    .ai-title {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+    }
+    .ai-title span { color: #3ddc84; }
+    .ai-desc {
+      font-size: 0.85rem;
+      color: #7a9a85;
+      line-height: 1.65;
+      margin-bottom: 1.2rem;
+    }
+    .ai-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px;
+      margin-bottom: 1.4rem;
+    }
+    .ai-feat {
+      background: #071510;
+      border: 1px solid #1a3020;
+      border-radius: 9px;
+      padding: 0.7rem 0.85rem;
+    }
+    .ai-feat-icon {
+      width: 16px; height: 16px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.4rem;
+    }
+    .ai-feat-text {
+      font-size: 0.78rem;
+      color: #5a8a6a;
+      line-height: 1.45;
+    }
+    .ai-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #3ddc84;
+      color: #0a1a10;
+      font-family: 'Golos Text', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 9px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .ai-cta:hover { background: #2ec872; }
+
+    /* CONTACTS */
+    .contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 2rem;
+    }
+    .cl {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      background: #131313;
+      border: 1px solid #1e1e1e;
+      border-radius: 9px;
+      padding: 8px 13px;
+      transition: border-color 0.15s;
+    }
+    .cl:hover { border-color: #3ddc84; }
+    .cl-icon {
+      width: 28px; height: 28px;
+      background: #0e2a1a;
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .cl-lbl {
+      font-size: 10px;
+      color: #444;
+      display: block;
+      margin-bottom: 1px;
+      font-weight: 500;
+    }
+    .cl-val {
+      font-size: 0.82rem;
+      color: #ccc;
+      display: block;
+      white-space: nowrap;
+    }
+
+    /* BUTTONS */
+    .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn {
+      font-family: 'Golos Text', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 11px 22px;
+      border-radius: 9px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s;
+      display: inline-block;
+    }
+    .btn-primary { background: #3ddc84; color: #0a1a10; border: none; }
+    .btn-primary:hover { background: #2ec872; }
+    .btn-sec { background: transparent; color: #aaa; border: 1px solid #252525; }
+    .btn-sec:hover { border-color: #3ddc84; color: #3ddc84; }
+
+    /* MOBILE */
+    @media (max-width: 520px) {
+      .hero, .body { padding: 2rem 1.5rem; }
+      .ai-block { padding: 1.3rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="pill">MPSTATS DATA</div>
+      <div class="hero-name">Михаил <span>Смирнов</span></div>
+      <div class="hero-role">Аналитик · MPSTATS DATA</div>
+      <div class="hero-desc">Готовые решения для брендов, аналитиков и категорийных менеджеров — аналитика маркетплейсов без ручной работы.</div>
+    </div>
+
+    <div class="body">
+
+      <!-- SERVICES -->
+      <div class="slabel">Что мы предлагаем</div>
+      <div class="services">
+        <div class="sc">
+          <div class="sc-tag">Для бизнеса</div>
+          <div class="sc-head">Контроль цен и остатков</div>
+          <div class="sc-text">Автоматический мониторинг РРЦ и контрафакта на WB и Ozon. Уведомления в Telegram.</div>
+        </div>
+        <div class="sc">
+          <div class="sc-tag">Для аналитиков</div>
+          <div class="sc-head">100+ ГБ данных</div>
+          <div class="sc-text">Готовые выгрузки в BI-систему: остатки, заказы, конкуренты, реклама. API без ручной работы.</div>
+        </div>
+        <div class="sc">
+          <div class="sc-tag">Для руководителей</div>
+          <div class="sc-head">Персональная аналитика</div>
+          <div class="sc-text">Тренды, конкуренты, ценовая политика. Никакой ручной сортировки.</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- AI BLOCK -->
+      <div class="slabel">Новое направление</div>
+      <div class="ai-block">
+        <div class="ai-badge">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#3ddc84" stroke-width="1"/><circle cx="5" cy="5" r="1.5" fill="#3ddc84"/></svg>
+          AI-агенты под заказ
+        </div>
+        <div class="ai-title">Кастомный <span>AI-агент</span><br>для вашего бизнеса</div>
+        <div class="ai-desc">Мы разрабатываем персонального AI-агента специально под задачи вашей компании. Агент работает 24/7, автоматизирует рутину и интегрируется с вашими системами.</div>
+        <div class="ai-features">
+          <div class="ai-feat">
+            <div class="ai-feat-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="4" width="12" height="8" rx="2" stroke="#3ddc84" stroke-width="1.1"/><path d="M4 4V3a3 3 0 016 0v1" stroke="#3ddc84" stroke-width="1.1"/></svg></div>
+            <div class="ai-feat-text">Разработка под ваши бизнес-процессы</div>
+          </div>
+          <div class="ai-feat">
+            <div class="ai-feat-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h2l2-5 2 10 2-5h2" stroke="#3ddc84" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="ai-feat-text">Аналитика, мониторинг, уведомления</div>
+          </div>
+          <div class="ai-feat">
+            <div class="ai-feat-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="4" cy="7" r="2" stroke="#3ddc84" stroke-width="1.1"/><circle cx="10" cy="4" r="2" stroke="#3ddc84" stroke-width="1.1"/><circle cx="10" cy="10" r="2" stroke="#3ddc84" stroke-width="1.1"/><path d="M6 7h2M6 6l2-1.5M6 8l2 1.5" stroke="#3ddc84" stroke-width="1"/></svg></div>
+            <div class="ai-feat-text">Интеграция с CRM, Telegram, BI</div>
+          </div>
+          <div class="ai-feat">
+            <div class="ai-feat-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v2M7 11v2M1 7h2M11 7h2M3.2 3.2l1.4 1.4M9.4 9.4l1.4 1.4M3.2 10.8l1.4-1.4M9.4 4.6l1.4-1.4" stroke="#3ddc84" stroke-width="1.1" stroke-linecap="round"/><circle cx="7" cy="7" r="2" stroke="#3ddc84" stroke-width="1.1"/></svg></div>
+            <div class="ai-feat-text">Работает 24/7 без ошибок</div>
+          </div>
+        </div>
+        <a class="ai-cta" href="https://flowen.io/" target="_blank">
+          Узнать подробнее
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 9.5l7-7M4 2.5h5.5V8" stroke="#0a1a10" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <hr class="divider">
+
+      <!-- CONTACTS -->
+      <div class="slabel">Связаться</div>
+      <div class="contacts">
+        <a class="cl" href="mailto:smirnov.mikhail@mpstats.io">
+          <div class="cl-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="8" rx="1.5" stroke="#3ddc84" stroke-width="1.2"/><path d="M1 4l6 4 6-4" stroke="#3ddc84" stroke-width="1.2"/></svg></div>
+          <span><span class="cl-lbl">Email</span><span class="cl-val">smirnov.mikhail@mpstats.io</span></span>
+        </a>
+        <a class="cl" href="https://t.me/SMA_MA">
+          <div class="cl-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#3ddc84" stroke-width="1.2"/><path d="M3.5 7l2 1.5L10 5" stroke="#3ddc84" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span><span class="cl-lbl">Telegram</span><span class="cl-val">@SMA_MA</span></span>
+        </a>
+        <a class="cl" href="https://wa.me/79312837315">
+          <div class="cl-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#3ddc84" stroke-width="1.2"/><path d="M4.5 4.5C5.5 5.5 6 6.5 6 7c0 .5-1 1-1 1.5s1.5 2 2 2 1-.5 1.5-1c.5-.5-.5-1.5-1-2" stroke="#3ddc84" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+          <span><span class="cl-lbl">WhatsApp</span><span class="cl-val">+7 931 283-73-15</span></span>
+        </a>
+        <a class="cl" href="https://max.ru/+79312837315">
+          <div class="cl-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#3ddc84" stroke-width="1.2"/><text x="7" y="10.5" text-anchor="middle" font-size="7.5" font-weight="700" fill="#3ddc84" font-family="Golos Text,sans-serif">М</text></svg></div>
+          <span><span class="cl-lbl">Макс</span><span class="cl-val">+7 931 283-73-15</span></span>
+        </a>
+      </div>
+
+      <!-- BUTTONS -->
+      <div class="btns">
+        <a class="btn btn-primary" href="https://mpstats.io/landing/custom-research?from=data_kp_misha" target="_blank">Наш сайт</a>
+        <a class="btn btn-sec" href="https://docs.google.com/presentation/d/1qmWMMnZBlTy2KxoNW4vL8C9SB3-xn6ZE3TPMUsxtmnY/edit#slide=id.p7" target="_blank">Презентация и кейсы</a>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
