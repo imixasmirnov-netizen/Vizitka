@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Михаил Смирнов — MPSTATS DATA и ИИ-Решения</title>
+    
+    <!-- Tailwind CSS для адаптивной верстки -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Шрифт Inter из Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#050811',
+                            card: '#0f1424',
+                            accent: '#3b82f6',
+                            accentGlow: 'rgba(59, 130, 246, 0.15)',
+                            emerald: '#10b981',
+                            greenBtn: '#22c55e'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050811;
+        }
+        .glow-accent {
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
+        }
+        .glow-emerald {
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+        }
+        .modal-blur {
+            backdrop-filter: blur(16px);
+            background-color: rgba(5, 8, 15, 0.8);
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.1);
+        }
+        .flagship-hover:hover {
+            transform: translateY(-6px);
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.15);
+        }
+        /* Кастомный веб-скроллбар */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050811;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+    </style>
+</head>
+<body class="text-slate-200 antialiased selection:bg-blue-500 selection:text-white">
+
+    <nav class="fixed top-0 left-0 w-full bg-[#050811]/85 backdrop-blur-md border-b border-white/5 z-50">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+                <span class="bg-blue-600 text-white px-2.5 py-1 rounded-md text-sm font-black">MP</span>
+                <span>MPSTATS <span class="text-blue-500 font-semibold">DATA</span></span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm text-slate-400 font-medium">
+                <a href="#about" class="hover:text-white transition-colors">Обо мне</a>
+                <a href="#cases" class="hover:text-white transition-colors">Решения и Кейсы</a>
+                <a href="#ai-agents" class="hover:text-white transition-colors">ИИ-Агенты</a>
+                <a href="#contacts" class="hover:text-white transition-colors">Контакты</a>
+            </div>
+            <a href="#contacts" class="hidden sm:inline-flex text-xs font-semibold bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 border border-blue-500/20 px-4 py-2 rounded-lg transition-all">
+                Быстрая связь
+            </a>
+        </div>
+    </nav>
+
+    <header class="relative pt-36 pb-20 overflow-hidden bg-[radial-gradient(circle_at_top_center,rgba(59,130,246,0.12),transparent_55%)]">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-6">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                Аналитика маркетплейсов для Enterprise
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-6 leading-tight">
+                Михаил <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-indigo-400">Смирнов</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-300 font-medium mb-4">
+                Менеджер по продажам / Аналитик решений · MPSTATS DATA
+            </p>
+            <p class="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                Проектирование и развертывание сложных data-продуктов, автоматизированных API-выгрузок и интеллектуальных ИИ-систем для крупного e-commerce сегмента.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#contacts" class="w-full sm:w-auto px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-xl transition-all shadow-lg shadow-blue-600/20 hover:shadow-blue-600/30 text-center">
+                    Связаться со мной
+                </a>
+                <a href="https://docs.google.com/presentation/d/1qmWMMnZBlTy2KxoNW4vL8C9SB3-xn6ZE3TPMUsxtmnY/edit#slide=id.p7" target="_blank" class="w-full sm:w-auto px-8 py-3.5 bg-white/5 hover:bg-white/10 text-white font-medium rounded-xl border border-white/10 transition-all text-center">
+                    Презентация и кейсы
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="py-20 border-t border-white/5 bg-[#080d1a]/40">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="text-xs font-bold text-blue-500 uppercase tracking-wider">Профессиональный профиль</span>
+                    <h2 class="text-3xl font-bold text-white tracking-tight">Экспертиза в Больших Данных и E-commerce</h2>
+                    <p class="text-slate-400 leading-relaxed text-base">
+                        Я представляю компанию <strong class="text-white">MPSTATS</strong> — лидирующую экосистему аналитики маркетплейсов. В рамках направления <strong class="text-white">MPSTATS DATA</strong> мы проектируем кастомные решения для брендов, аналитиков, финтех-структур и категорийных менеджеров, которым тесно в рамках стандартных дашбордов.
+                    </p>
+                    <p class="text-slate-400 leading-relaxed text-base">
+                        Моя цель — помочь вашему бизнесу полностью избавиться от рутины, автоматизировать передачу терабайтных архивов и интегрировать продвинутые аналитические инструменты для принятия решений на основе реальных данных.
+                    </p>
+                </div>
+                <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+                    <div class="p-6 bg-[#0f1424] border border-white/5 rounded-2xl text-center glow-accent">
+                        <div class="text-4xl font-extrabold text-blue-500 mb-2">1 ТБ+</div>
+                        <p class="text-sm text-slate-300 font-medium">Ежедневный лимит выгрузки сырых данных</p>
+                    </div>
+                    <div class="p-6 bg-[#0f1424] border border-white/5 rounded-2xl text-center">
+                        <div class="text-4xl font-extrabold text-emerald-500 mb-2">100%</div>
+                        <p class="text-sm text-slate-300 font-medium">Автоматизация процессов без ручного труда</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cases" class="py-20 border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-white tracking-tight mb-4">Готовые Enterprise-решения</h2>
+                <p class="text-slate-400">
+                    Нажмите на любую карточку ниже, чтобы открыть интерактивную спецификацию решения: разбор болей, выгоды, JTBD сценарии и Product-Market Fit.
+                </p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-2 mb-12">
+                <button onclick="filterCategory('all', this)" class="tab-btn px-5 py-2.5 rounded-full text-sm font-medium bg-blue-600 text-white border border-blue-600 transition-all">Все решения</button>
+                <button onclick="filterCategory('bigdata', this)" class="tab-btn px-5 py-2.5 rounded-full text-sm font-medium bg-white/5 text-slate-400 hover:text-white border border-white/5 hover:bg-white/10 transition-all">Большие данные и Срезы</button>
+                <button onclick="filterCategory('automation', this)" class="tab-btn px-5 py-2.5 rounded-full text-sm font-medium bg-white/5 text-slate-400 hover:text-white border border-white/5 hover:bg-white/10 transition-all">Автоматизация и API</button>
+                <button onclick="filterCategory('control', this)" class="tab-btn px-5 py-2.5 rounded-full text-sm font-medium bg-white/5 text-slate-400 hover:text-white border border-white/5 hover:bg-white/10 transition-all">Контроль и Безопасность</button>
+                <button onclick="filterCategory('marketing', this)" class="tab-btn px-5 py-2.5 rounded-full text-sm font-medium bg-white/5 text-slate-400 hover:text-white border border-white/5 hover:bg-white/10 transition-all">Маркетинг и Тренды</button>
+            </div>
+
+            <div id="cases-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Карточки генерируются динамически через JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="ai-agents" class="py-20 border-t border-white/5 bg-[#080d1a]/40">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-6">
+                Новое направление
+            </span>
+            <h2 class="text-3xl font-bold text-white tracking-tight mb-4">
+                Кастомный ИИ-агент под бизнес-процессы
+            </h2>
+            <p class="text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+                Мы проектируем персональных ИИ-агентов под внутренние системы вашей компании. Полная автоматизация рутины, аналитика в реальном времени, мониторинг и интеграция в режиме 24/7.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-left mb-12">
+                <div class="p-5 bg-[#0f1424] border border-white/5 rounded-xl">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-3">
+                        <i class="fa-solid fa-gears"></i>
+                    </div>
+                    <h4 class="text-sm font-semibold text-white mb-1">Разработка под задачи</h4>
+                    <p class="text-xs text-slate-400">Кастомный инжиниринг под ваши процессы.</p>
+                </div>
+                <div class="p-5 bg-[#0f1424] border border-white/5 rounded-xl">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-3">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h4 class="text-sm font-semibold text-white mb-1">Умная аналитика</h4>
+                    <p class="text-xs text-slate-400">Мониторинг, отчеты и мгновенные инсайты.</p>
+                </div>
+                <div class="p-5 bg-[#0f1424] border border-white/5 rounded-xl">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-3">
+                        <i class="fa-solid fa-circle-nodes"></i>
+                    </div>
+                    <h4 class="text-sm font-semibold text-white mb-1">Интеграция систем</h4>
+                    <p class="text-xs text-slate-400">CRM, ERP, Telegram, BI и базы данных.</p>
+                </div>
+                <div class="p-5 bg-[#0f1424] border border-white/5 rounded-xl">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-3">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <h4 class="text-sm font-semibold text-white mb-1">Работа 24/7</h4>
+                    <p class="text-xs text-slate-400">Бесперебойное функционирование без ошибок.</p>
+                </div>
+            </div>
+            <a href="https://flowen.io/" target="_blank" class="inline-flex items-center gap-2 px-8 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-xl transition-all shadow-lg shadow-emerald-600/20">
+                Узнать подробнее об ИИ-решениях
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </a>
+        </div>
+    </section>
+
+    <section id="contacts" class="py-20 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs font-bold text-blue-500 uppercase tracking-wider">Связаться</span>
+                <h2 class="text-3xl font-bold text-white tracking-tight mt-2 mb-4">Контакты Михаила Смирнова</h2>
+                <p class="text-slate-400">
+                    Свяжитесь со мной напрямую для обсуждения индивидуальных решений, кастомных выгрузок и интеграции ИИ-агентов в ваш бизнес.
+                </p>
+            </div>
+
+            <!-- Мобильная и десктопная сетка контактов -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
+                <a href="mailto:smirnov.mikhail@mpstats.io" class="flex items-center gap-4 p-5 bg-[#0f1424] border border-white/5 rounded-xl hover:border-blue-500/30 transition-all group">
+                    <div class="w-10 h-10 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
+                        <i class="fa-regular fa-envelope"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Email</p>
+                        <p class="text-sm text-white font-medium mt-0.5">smirnov.mikhail@mpstats.io</p>
+                    </div>
+                </a>
+                <a href="https://t.me/SMA_MA" target="_blank" class="flex items-center gap-4 p-5 bg-[#0f1424] border border-white/5 rounded-xl hover:border-blue-500/30 transition-all group">
+                    <div class="w-10 h-10 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-telegram"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Telegram</p>
+                        <p class="text-sm text-white font-medium mt-0.5">@SMA_MA</p>
+                    </div>
+                </a>
+                <a href="https://wa.me/79312837315" target="_blank" class="flex items-center gap-4 p-5 bg-[#0f1424] border border-white/5 rounded-xl hover:border-blue-500/30 transition-all group">
+                    <div class="w-10 h-10 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">WhatsApp</p>
+                        <p class="text-sm text-white font-medium mt-0.5">+7 931 283-73-15</p>
+                    </div>
+                </a>
+                <a href="tel:+79312837315" class="flex items-center gap-4 p-5 bg-[#0f1424] border border-white/5 rounded-xl hover:border-blue-500/30 transition-all group">
+                    <div class="w-10 h-10 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Макс</p>
+                        <p class="text-sm text-white font-medium mt-0.5">+7 931 283-73-15</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 border-t border-white/5">
+                <a href="https://mpstats.io/landing/custom-research?from=data_kp_misha" target="_blank" class="w-full sm:w-auto px-10 py-4 bg-brand-greenBtn hover:opacity-90 text-white font-semibold rounded-xl transition-all text-center glow-emerald">
+                    Наш сайт
+                </a>
+                <a href="https://docs.google.com/presentation/d/1qmWMMnZBlTy2KxoNW4vL8C9SB3-xn6ZE3TPMUsxtmnY/edit#slide=id.p7" target="_blank" class="w-full sm:w-auto px-10 py-4 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-xl border border-white/10 transition-all text-center">
+                    Презентация и кейсы
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div id="modal-container" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="absolute inset-0 modal-blur" onclick="closeModal()"></div>
+        <div class="relative w-full max-w-2xl bg-[#0f1424] border border-white/10 rounded-2xl p-6 md:p-8 max-h-[90vh] overflow-y-auto shadow-2xl z-10 transition-all transform scale-95 duration-300" id="modal-content-panel">
+            <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div id="modal-body">
+                <!-- Заполняется динамически скриптом -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-t border-white/5 py-12 bg-[#03060c]">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-sm text-slate-500">
+            <p>&copy; 2026 MPSTATS DATA. Все права защищены.</p>
+            <div class="flex gap-6">
+                <a href="https://mpstats.io/landing/custom-research?from=data_kp_misha" target="_blank" class="hover:text-slate-300 transition-colors">Наш сайт</a>
+                <a href="#about" class="hover:text-slate-300 transition-colors">Обо мне</a>
+                <a href="#contacts" class="hover:text-slate-300 transition-colors">Контакты</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Полный структурированный массив кейсов на русском языке
+        const cases = [
+            {
+                id: 1,
+                title: "База данных",
+                subtitle: "Детальные данные о миллионах товарах и продавцах",
+                desc: "Полные структурированные выборки рынка для аналитики, сегментации и стратегического планирования бизнеса.",
+                category: "bigdata",
+                ca: "B2B-компании, маркетологи, аналитические агентства, крупные бренды, BI-команды.",
+                pain: "Нехватка чистых сырых данных для детального анализа рынка, сложности с сегментацией конкурентов и поиском клиентов. Ранее использовался долгий и дорогой ручной сбор или очистка.",
+                benefit: "Мгновенный доступ к нужным массивам данных в 1 клик, принятие безошибочных коммерческих решений на основе реальных проверенных цифр.",
+                composition: "Выборки под любые задачи (ABC-анализ, когортный анализ и др.), скачиваемые форматы CSV/XLSX/JSON, гибкая система фильтров, готовые шаблоны, интеграция в BI/Google Sheets.",
+                jtbd: "Когда я анализирую рынок, я хочу получить полную выгрузку товаров/продавцов, чтобы быстро сегментировать аудиторию и провести глубокий анализ.",
+                pmf: "B2B-компании и независимые исследователи, которым требуются полные массивы данных для кастомной внутренней аналитики."
+            },
+            {
+                id: 2,
+                title: "API-технологии",
+                subtitle: "Индивидуальный API для автоматизации аналитики",
+                desc: "Построение бесшовного автоматического потока данных напрямую во внутреннюю инфраструктуру вашей компании.",
+                category: "automation",
+                ca: "IT-отделы крупных селлеров, Enterprise-компании, BI-команды, разработчики B2B-сервисов.",
+                pain: "Жесткие лимиты стандартных API маркетплейсов, необходимость вручную переносить терабайты данных в Excel, разрозненные форматы таблиц и их параметров.",
+                benefit: "Полный обход стандартных ограничений по API, моментальное получение готовой структуры данных без дополнительных внутренних агрегаций.",
+                composition: "Кастомный API под ваши бизнес-задачи, бесшовное подключение источников данных, интеграция со сторонними BI/CRM системами, автоматическое логирование ошибок.",
+                jtbd: "Когда я строю свою ERP/BI систему, я хочу получать данные по API без лимитов, чтобы полностью автоматизировать управление без ручного труда.",
+                pmf: "Крупные селлеры и интеграторы с собственной IT-инфраструктурой, которым необходим бесперебойный поток свежих данных."
+            },
+            {
+                id: 3,
+                title: "Контроль РРЦ",
+                subtitle: "Контроль РРЦ и защита вашего бренда",
+                desc: "Почасовой автоматический контроль цен дистрибьюторов на маркетплейсах и выявление серого импорта.",
+                category: "control",
+                ca: "Бренды, производители, эксклюзивные дистрибьюторы, владельцы торговых марок.",
+                pain: "Систематический демпинг со стороны партнеров, потеря маржинальности бренда по всей сети, продажа неоригинальной (пиратской) продукции.",
+                benefit: "+15-30% к чистой марже бизнеса, стопроцентная защита репутации бренда, скорость реакции на демпинг от 1 часа.",
+                composition: "Почасовой мониторинг цен на Ozon и Wildberries, детектор пиратских карточек и листингов (сверка по фото и артикулам), автооповещения нарушителей, наглядная карта нарушений.",
+                jtbd: "Когда мои партнеры продают товар, я хочу автоматически ловить тех, кто занижает цены, чтобы быстро остановить демпинг и защитить маржу.",
+                pmf: "Крупные вендоры с развитой дилерской сетью, страдающие от ценовых войн и неконтролируемого серого импорта."
+            },
+            {
+                id: 4,
+                title: "База конкурентов",
+                subtitle: "Автоматизированная база ваших конкурентов",
+                desc: "Ежедневная комплексная аналитика метрик конкурентов: ассортимент, цены, остатки и динамика позиций.",
+                category: "control",
+                ca: "Селлеры (Middle/Enterprise сегмента), категорийные менеджеры, штатные аналитики.",
+                pain: "Трата до 20 часов рабочего времени аналитиков в неделю на ручной сбор данных о конкурентах, медленная реакция на их действия, отсутствие единой картины.",
+                benefit: "Сокращение времени на сбор данных до 30 минут в неделю, мгновенные реакции на любые изменения конкурентов (акции, скидки).",
+                composition: "Полный перечень ассортимента конкурентов (SKU, цены), динамика товарных остатков, гибкие фильтры, автоматическая выгрузка в файлы, дашборды.",
+                jtbd: "Когда я управляю продажами, я хочу мониторить показатели главных конкурентов, чтобы оперативно реагировать на их ценовые изменения и остатки.",
+                pmf: "Активные продавцы, стремящиеся надежно удерживать и увеличивать долю рынка в высококонкурентных товарных нишах."
+            },
+            {
+                id: 5,
+                title: "Детектор новинок",
+                subtitle: "Детектор новинок ваших конкурентов",
+                desc: "Ежедневный скрининг новых SKU, запускаемых лидерами рынка в вашей нише и категории.",
+                category: "marketing",
+                ca: "Продакт-менеджеры, закупщики, e-com предприниматели в активном поиске ниш.",
+                pain: "Пропуск горячих трендов на маркетплейсах, дефицит свежих идей для оперативного расширения ассортимента, запоздалый запуск новинок.",
+                benefit: "Уверенный рост рыночной доли, оптимизация товарной матрицы, запуск трендовых товаров в числе самых первых.",
+                composition: "Автоматический скрининг новых/возрожденных SKU на WB и Ozon, фильтрация по параметрам, аналитика скорости роста продаж, мгновенные Telegram-оповещения.",
+                jtbd: "Когда я планирую закупки, я хочу первым узнавать о новинках конкурентов, чтобы успеть занять долю рынка до наплыва массовых продавцов.",
+                pmf: "Динамично развивающиеся e-commerce проекты, для которых критически важна скорость вывода новинок."
+            },
+            {
+                id: 6,
+                title: "База продавцов",
+                subtitle: "Готовая база продавцов (Лиды для B2B)",
+                desc: "Полная база действующих продавцов маркетплейсов с ключевыми финансовыми метриками для B2B-продаж.",
+                category: "marketing",
+                ca: "B2B-сервисы (фулфилменты, банки, логистические, рекламные и консалтинговые агентства).",
+                pain: "Длинный ручной поиск целевой аудитории, неэффективные холодные звонки мелким селлерам без бюджета, выгорание отдела продаж.",
+                benefit: "Существенная экономия времени коммерческого отдела, точечный пресейл только платежеспособным селлерам (с оборотом от 1 млн ₽/мес).",
+                composition: "Финансовые показатели селлеров (обороты, динамика роста, процент возвратов), автоматическая выгрузка готовых лидов прямо в вашу CRM.",
+                jtbd: "Когда я руковожу B2B-продажами, я хочу получить список селлеров с оборотами, чтобы менеджеры звонили только целевым лидам.",
+                pmf: "Любой B2B-бизнес в e-commerce, чьими основными клиентами являются платежеспособные продавцы маркетплейсов."
+            },
+            {
+                id: 7,
+                title: "Контроль дистрибуции",
+                subtitle: "Ежедневный автоматический контроль дистрибуции",
+                desc: "Умный мониторинг товарных запасов на складах партнеров и предупреждение упущенной прибыли.",
+                category: "control",
+                ca: "Крупные производители, оптовые дистрибьюторы, Enterprise-поставщики.",
+                pain: "Регулярный дефицит (out-of-stock) на складах дистрибьюторов, приводящий к миллионной упущенной выручке бренда.",
+                benefit: "Опережающий прогноз окончания товаров на региональных складах, оперативные уведомления о дефиците, идеальная логистика.",
+                composition: "Детектор «пустых складов» (прогноз окончания товара за 7 дней), интерактивные тепловые карты региональных складов, глубокая интеграция с ERP бренда.",
+                jtbd: "Когда я снабжаю дистрибьюторов, я хочу видеть темпы продаж и остатки на их складах, чтобы заранее планировать и отгружать новые партии.",
+                pmf: "Крупные вендоры, выстраивающие единую прозрачную цепочку поставок по всей стране через партнерские сети."
+            },
+            {
+                id: 8,
+                title: "Дампы Big Data",
+                subtitle: "Структурированные сырые дампы (до 1 ТБ)",
+                desc: "Стабильный поток исторических и свежих данных рынка маркетплейсов для обучения ML и ИИ.",
+                category: "bigdata",
+                ca: "Enterprise-компании, Data Science отделы, исследовательские и научные организации.",
+                pain: "Невозможность самостоятельно собрать терабайты качественных исторических данных для точного обучения прогностических моделей ИИ.",
+                benefit: "Стабильный, надежный поток чистых данных, отсутствие необходимости настраивать и оплачивать собственную сложную инфраструктуру парсинга.",
+                composition: "Ежедневная отгрузка от 100 ГБ до 1 ТБ сырых данных (история цен, скидок, остатков, заказов, отзывов), автоматический экспорт в хранилища S3/GCS.",
+                jtbd: "Когда я строю предиктивные ИИ-модели, мне нужны петабайты сырых рыночных данных, чтобы обучать алгоритмы.",
+                pmf: "Крупные корпорации с собственным штатом аналитиков данных и дата-сайентистов, строящих свои ML-модели."
+            },
+            {
+                id: 9,
+                title: "Скоринг селлеров",
+                subtitle: "Скоринг селлеров для финтеха и банков",
+                desc: "Мгновенная аналитика финансовой благонадежности селлеров для принятия решений о финансировании.",
+                category: "automation",
+                ca: "Банки, финтех-платформы, факторинговые сервисы, частные инвесторы.",
+                pain: "Непрозрачность доходов продавцов на маркетплейсах, неприменимость стандартного банковского андеррайтинга в e-com, высокие риски невозвратов.",
+                benefit: "Быстрый безопасный рост кредитного портфеля, автоматизация оценки рисков за 1 минуту, снижение показателей дефолтности.",
+                composition: "Анализ выручки, динамика брендов, структура SKU, предиктивная модель расчета чистой прибыли с учетом расходов по нише.",
+                jtbd: "Когда я рассматриваю заявку e-com бизнеса на кредит, я хочу видеть его реальную маржинальность и динамику продаж, чтобы объективно оценить риски.",
+                pmf: "Банковские и финансовые организации, активно кредитующие продавцов маркетплейсов."
+            },
+            {
+                id: 10,
+                title: "Оптимизация запасов",
+                subtitle: "Прогнозирование спроса и оптимизация запасов",
+                desc: "Математические предиктивные модели спроса для исключения излишков и дефицита товаров.",
+                category: "automation",
+                ca: "Крупные и средние продавцы, категорийные менеджеры, департаменты логистики и закупок.",
+                pain: "Замораживание миллионов рублей оборотного капитала в неликвидах, либо просадки из-за отсутствия топовых SKU в пиковые периоды.",
+                benefit: "Повышение оборачиваемости капитала, снижение затрат на хранение, автоматизация планирования поставок на основе трендов и сезонности.",
+                composition: "Регулярный прогноз спроса по каждому SKU, рекомендации по объемам и датам отгрузок, аналитические дашборды out-of-stock.",
+                jtbd: "Когда я управляю запасами, я хочу точно знать, сколько и какого товара мне нужно заказать, чтобы избежать дефицита и излишков.",
+                pmf: "Селлеры с широким ассортиментом, стремящиеся к максимальной эффективности оборотного капитала."
+            },
+            {
+                id: 11,
+                title: "Эластичность спроса",
+                subtitle: "Анализ ценовой эластичности спроса",
+                desc: "Определение чувствительности спроса к изменению цен для максимизации чистой прибыли или выручки.",
+                category: "marketing",
+                ca: "Коммерческие директора, маркетологи, руководители продаж на маркетплейсах.",
+                pain: "Недополученная прибыль из-за неоптимальных цен (слишком низких или завышенных), страх потерять долю рынка при малейшем повышении.",
+                benefit: "Умное обоснованное ценообразование, расчет оптимального дисконта для участия в акциях без ухода в минус.",
+                composition: "Отчет с расчетом коэффициентов эластичности по SKU, удобный интерактивный симулятор сценариев «что-если», готовые стратегии ценообразования.",
+                jtbd: "Когда я устанавливаю цену на товар, я хочу понимать, как она повлияет на спрос, чтобы найти баланс между объемом продаж и маржинальностью.",
+                pmf: "Бренды и производители с широким ассортиментом, самостоятельно управляющие своей ценовой политикой."
+            },
+            {
+                id: 12,
+                title: "Портал самообслуживания",
+                subtitle: "Self-service портал для выгрузки данных",
+                desc: "Веб-интерфейс, позволяющий вашим аналитикам мгновенно формировать выгрузки данных без обращения к менеджеру.",
+                category: "automation",
+                ca: "Аналитики, категорийные менеджеры и маркетологи на стороне клиента.",
+                pain: "Длинные циклы согласования и длительное ручное ожидание выгрузок от поддержки, отсутствие гибкости в настройке параметров.",
+                benefit: "Получение точных срезов данных за минуты, полная гибкость настройки, отсутствие зависимости от графика работы поддержки.",
+                composition: "Личный кабинет клиента, конструктор отчетов с выбором полей и фильтров, история запросов, настройка автоматического экспорта по расписанию.",
+                jtbd: "Когда мне нужны данные для анализа, я хочу быстро и самостоятельно их получить в нужном мне виде, чтобы не тратить время на ожидания.",
+                pmf: "Enterprise-клиенты с собственными сильными аналитическими отделами, требующими регулярных срезов рынка."
+            },
+            {
+                id: 13,
+                title: "ИИ-аналитика семантики",
+                subtitle: "AI-аналитика поисковых запросов с семантической кластеризацией",
+                desc: "Флагманский продукт. Глубокий лингвистический анализ спроса для поиска растущих трендов до появления физических продаж.",
+                category: "marketing",
+                ca: "Директора по маркетингу, руководители R&D, FMCG-производители (косметика, бытовая химия, продукты питания).",
+                pain: "Тренды на маркетплейсах фиксируются слишком поздно (уже по факту свершившихся продаж конкурентов). Интуитивный запуск новых продуктов.",
+                benefit: "Проектирование новинок на основе раннего спроса, точечные маркетинговые посылы под боли аудитории, гарантированный запуск бестселлеров.",
+                composition: "Автоматический сбор поисковых данных, семантическая кластеризация по активным ингредиентам и эффектам, аналитика ранних сигналов роста, интерактивный дашборд.",
+                jtbd: "Когда я отвечаю за развитие продуктовой линейки в категории, я хочу понимать, какие ингредиенты и свойства начинают расти в интересе потребителей, чтобы запускать релеронтные продукты раньше конкурентов.",
+                pmf: "Крупные FMCG-бренды, регулярно проводящие стратегические сессии и интегрирующие аналитические инсайты в создание физического продукта.",
+                isFlagship: true
+            }
+        ];
+
+        function generateCards() {
+            const container = document.getElementById('cases-grid');
+            container.innerHTML = '';
+
+            cases.forEach(c => {
+                const isFlagship = c.isFlagship;
+                
+                let cardHTML = '';
+                if (isFlagship) {
+                    // Флагманская карточка (на всю ширину)
+                    cardHTML = `
+                        <div class="case-card flagship-hover col-span-1 md:col-span-2 lg:col-span-3 bg-gradient-to-br from-[#0f1d3a] to-[#0f1424] border border-emerald-500/25 p-8 rounded-2xl cursor-pointer flex flex-col justify-between" data-category="${c.category}" onclick="openModal(${c.id})">
+                            <div>
+                                <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+                                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">${c.title}</span>
+                                    <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1">Флагманское решение <i class="fa-solid fa-arrow-right"></i></span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-bold text-white mb-3">${c.subtitle}</h3>
+                                <p class="text-sm text-slate-300 max-w-3xl leading-relaxed mb-6">${c.desc}</p>
+                            </div>
+                            <div class="pt-4 border-t border-white/5 flex flex-wrap gap-4 text-xs text-slate-400">
+                                <div><strong>ЦА:</strong> FMCG-производители, R&D отделы</div>
+                                <div><strong>Суть:</strong> Поиск ранних трендов по семантическим кластерам</div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Стандартная карточка
+                    cardHTML = `
+                        <div class="case-card card-hover bg-brand-card border border-white/5 p-6 rounded-2xl cursor-pointer flex flex-col justify-between" data-category="${c.category}" onclick="openModal(${c.id})">
+                            <div>
+                                <span class="inline-block px-2.5 py-1 rounded-md text-[11px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/15 mb-4">${c.title}</span>
+                                <h3 class="text-lg font-bold text-white mb-2 leading-tight">${c.subtitle}</h3>
+                                <p class="text-xs text-slate-400 leading-relaxed mb-6">${c.desc}</p>
+                            </div>
+                            <div class="pt-4 border-t border-white/5 flex justify-between items-center text-xs text-slate-400">
+                                <span>Подробнее</span>
+                                <i class="fa-solid fa-chevron-right text-[10px] text-blue-400"></i>
+                            </div>
+                        </div>
+                    `;
+                }
+                container.insertAdjacentHTML('beforeend', cardHTML);
+            });
+        }
+
+        function filterCategory(category, buttonElement) {
+            // Сброс активного класса у кнопок
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.className = "tab-btn px-5 py-2.5 rounded-full text-sm font-medium bg-white/5 text-slate-400 hover:text-white border border-white/5 hover:bg-white/10 transition-all";
+            });
+            // Установка активного класса
+            buttonElement.className = "tab-btn px-5 py-2.5 rounded-full text-sm font-medium bg-blue-600 text-white border border-blue-600 transition-all";
+
+            // Фильтрация карточек
+            const cards = document.querySelectorAll('.case-card');
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'flex';
+                } else {
+                    const cardCat = card.getAttribute('data-category');
+                    card.style.display = cardCat === category ? 'flex' : 'none';
+                }
+            });
+        }
+
+        function openModal(id) {
+            const caseItem = cases.find(c => c.id === id);
+            if (!caseItem) return;
+
+            const modalBody = document.getElementById('modal-body');
+            modalBody.innerHTML = `
+                <span class="inline-block px-2.5 py-1 rounded-md text-[11px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/15 mb-4">${caseItem.title}</span>
+                <h2 class="text-xl md:text-2xl font-bold text-white mb-4 leading-snug">${caseItem.subtitle}</h2>
+                <p class="text-slate-300 text-sm leading-relaxed mb-6">${caseItem.desc}</p>
+                
+                <div class="space-y-4 text-sm mt-6">
+                    <div class="p-4 bg-white/[0.02] border border-white/5 rounded-xl">
+                        <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block mb-1">Целевая аудитория (ЦА)</span>
+                        <p class="text-slate-300 text-sm">${caseItem.ca}</p>
+                    </div>
+                    
+                    <div class="p-4 bg-white/[0.02] border border-white/5 rounded-xl">
+                        <span class="text-xs font-bold text-red-400 uppercase tracking-wider block mb-1">Какую боль закрывает продукт</span>
+                        <p class="text-slate-300 text-sm">${caseItem.pain}</p>
+                    </div>
+                    
+                    <div class="p-4 bg-white/[0.02] border border-white/5 rounded-xl">
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1">Какие выгоды получает клиент</span>
+                        <p class="text-slate-300 text-sm">${caseItem.benefit}</p>
+                    </div>
+                    
+                    <div class="p-4 bg-white/[0.02] border border-white/5 rounded-xl">
+                        <span class="text-xs font-bold text-amber-500 uppercase tracking-wider block mb-1">Что входит в состав продукта</span>
+                        <p class="text-slate-300 text-sm">${caseItem.composition}</p>
+                    </div>
+                    
+                    <div class="p-4 bg-white/[0.02] border border-white/5 rounded-xl border-l-4 border-l-blue-500">
+                        <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block mb-1">Сценарий использования (JTBD)</span>
+                        <p class="text-slate-300 text-sm italic">"${caseItem.jtbd}"</p>
+                    </div>
+                    
+                    <div class="p-4 bg-white/[0.02] border border-white/5 rounded-xl">
+                        <span class="text-xs font-bold text-purple-400 uppercase tracking-wider block mb-1">Соответствие рынку (Product-Market Fit)</span>
+                        <p class="text-slate-300 text-sm">${caseItem.pmf}</p>
+                    </div>
+                </div>
+            `;
+
+            const modal = document.getElementById('modal-container');
+            const panel = document.getElementById('modal-content-panel');
+            
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            panel.classList.remove('scale-95');
+            panel.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal-container');
+            const panel = document.getElementById('modal-content-panel');
+            
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            panel.classList.remove('scale-100');
+            panel.classList.add('scale-95');
+            document.body.style.overflow = '';
+        }
+
+        window.onload = function() {
+            generateCards();
+        }
+    </script>
+</body>
+</html>
